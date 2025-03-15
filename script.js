@@ -77,35 +77,7 @@ async function getWeatherData(location) {
     }
 }
 
-function createHourlyTempChart(labels, temperatures) {
-    if (chartInstance !== null) {
-        chartInstance.destroy();
-    }
 
-    const ctx = document.getElementById('tempChart').getContext('2d');
-    chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Temperature (°C)',
-                data: temperatures,
-                borderColor: '#ff6f61',
-                backgroundColor: 'rgba(255, 111, 97, 0.2)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: false
-                }
-            }
-        }
-    });
-} 
 function createHourlyTempChart(labels, temperatures) {
      if (chartInstance !== null) {
         chartInstance.destroy();

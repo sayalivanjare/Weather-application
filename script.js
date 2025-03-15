@@ -1,19 +1,42 @@
 let chartInstance = null;
 
-async function getWeatherData(city) {
+// Load valid city and country names from a JSON file or API
+let validLocations = [];
+
+async function loadValidLocations() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json');
+        validLocations = await response.json();
+    } catch (error) {
+        console.error("Error loading location data:", error);
+    }
+}
+
+// Function to check if input is a valid city or country
+function isValidLocation(input) {
+    return validLocations.some(loc => loc.name.toLowerCase() === input.toLowerCase());
+}
+
+// Fetch weather data only if the input is valid
+async function getWeatherData(location) {
     const apiKey = "44b66bbb72cd546198c7c08426c0ed11";
-    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+    
+    if (!isValidLocation(location)) {
+        alert("Invalid city or country. Please enter a correct location.");
+        return;
+    }
+
+    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&limit=5&appid=${apiKey}`;
 
     try {
-        // Get correct city coordinates
         const geoResponse = await fetch(geoUrl);
         const geoData = await geoResponse.json();
 
-        if (!geoData.length) {
-            throw new Error("City not found. Please enter a valid city.");
+        if (!geoData || geoData.length === 0) {
+            throw new Error("Location not found. Please enter a valid city or country.");
         }
 
-        const { lat, lon, name } = geoData[0];
+        const { lat, lon, name, country } = geoData[0];
 
         // Fetch Weather Data
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
@@ -23,10 +46,11 @@ async function getWeatherData(city) {
         const weatherData = await weatherResponse.json();
 
         if (!weatherData || !weatherData.name) {
-            throw new Error("Weather data not found for this city.");
+            throw new Error("Weather data not found for this location.");
         }
 
-        document.getElementById('cityName').textContent = name;
+        // Display Weather Data
+        document.getElementById('cityName').textContent = `${name}, ${country}`;
         document.getElementById('weatherDescription').textContent = weatherData.weather[0].description;
         document.getElementById('temperature').textContent = `Temperature: ${weatherData.main.temp}°C`;
         document.getElementById('humidity').textContent = `Humidity: ${weatherData.main.humidity}%`;
@@ -52,6 +76,7 @@ async function getWeatherData(city) {
         document.getElementById('loading').style.display = 'none';
     }
 }
+
 function createHourlyTempChart(labels, temperatures) {
     if (chartInstance !== null) {
         chartInstance.destroy();
@@ -82,13 +107,11 @@ function createHourlyTempChart(labels, temperatures) {
     });
 }
 
-
 document.getElementById('getWeatherBtn').addEventListener('click', function() {
-    let city = document.getElementById('city').value.trim();
+    let location = document.getElementById('city').value.trim();
 
-    // Prevent empty, too short, or invalid city names
-    if (!city || city.length < 2 || city.toLowerCase() === "abc") {
-        alert('Please enter a valid city name.');
+    if (!location || location.length < 3) {
+        alert('Please enter a valid city or country with at least 3 characters.');
         return;
     }
 
@@ -97,5 +120,8 @@ document.getElementById('getWeatherBtn').addEventListener('click', function() {
     document.getElementById('chartContainer').style.display = 'none';
     document.getElementById('errorMessage').style.display = 'none';
 
-    getWeatherData(city);
+    getWeatherData(location);
 });
+
+// Load valid locations on page load
+loadValidLocations();

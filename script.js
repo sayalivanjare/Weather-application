@@ -105,7 +105,48 @@ function createHourlyTempChart(labels, temperatures) {
             }
         }
     });
+}function createHourlyTempChart(labels, temperatures) {
+    if (chartInstance !== null) {
+        chartInstance.destroy();
+    }
+
+    const ctx = document.getElementById('tempChart').getContext('2d');
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: temperatures,
+                borderColor: '#00E6E6', /* Neon Cyan Line */
+                backgroundColor: 'rgba(0, 230, 230, 0.2)', /* Transparent Fill */
+                pointBackgroundColor: '#00E6E6',
+                pointBorderColor: '#FFF',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: { color: '#FFF' } /* White X-axis Labels */
+                },
+                y: {
+                    ticks: { color: '#FFF' }, /* White Y-axis Labels */
+                    beginAtZero: false,
+                    grid: { color: 'rgba(255, 255, 255, 0.2)' } /* Light Grid */
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#FFF' } /* White Legend */
+                }
+            }
+        }
+    });
 }
+
 
 document.getElementById('getWeatherBtn').addEventListener('click', function() {
     let location = document.getElementById('city').value.trim();

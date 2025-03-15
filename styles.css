@@ -133,8 +133,7 @@ body {
 
 /* Visibility Control */
 #loading,
-#weatherData,
-#chartContainer {
+#weatherData, {
     display: none;
 }
 /* Chart Container */

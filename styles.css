@@ -1,175 +1,114 @@
-/* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Deep Night Gradient */
+    font-family: 'Arial', sans-serif;
+    background: #e0f7fa;
     background-size: cover;
     background-attachment: fixed;
     transition: background 1s ease-in-out;
-    color: white;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    color: #333;
 }
 
-/* Container */
 .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
 }
 
-/* Weather Card - Glassmorphism Effect */
 .weather-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
     border-radius: 15px;
-    padding: 30px;
+    padding: 20px;
     color: white;
-    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
 }
 
 .weather-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
 }
 
 .weather-card h1 {
     font-size: 3em;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .weather-card p {
-    font-size: 1.4em;
-    font-weight: 500;
+    font-size: 1.5em;
 }
 
-/* Temperature Icon */
-.weather-card img {
-    width: 100px;
-    margin: 15px 0;
-}
-
-/* Chart Container */
 .chart-container {
     width: 100%;
     height: 400px;
     margin-top: 30px;
 }
 
-/* Input Group */
 .input-group {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    gap: 10px;
 }
 
 .input-group input {
     border-radius: 25px;
     padding: 15px;
     font-size: 1.2em;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    outline: none;
-    transition: all 0.3s ease-in-out;
-    width: 250px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    transition: border 0.3s ease;
 }
 
 .input-group input:focus {
-    border: 2px solid #00E6E6;
-    box-shadow: 0 0 10px rgba(0, 230, 230, 0.7);
+    border: 2px solid #ffcc00;
+    outline: none;
 }
 
-/* Button Styles */
 .input-group button {
     border-radius: 25px;
     font-size: 1.2em;
     padding: 12px 20px;
-    background: linear-gradient(135deg, #00E6E6, #0077FF);
+    background-color: #ff9900;
     border: none;
     color: white;
-    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: background 0.3s ease;
 }
 
 .input-group button:hover {
-    background: linear-gradient(135deg, #0077FF, #0044CC);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 230, 230, 0.5);
+    background-color: #ffcc00;
 }
 
-/* Error Message */
-#errorMessage {
-    color: #FF4C4C;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-/* Spinner (Loading Animation) */
 .spinner-border {
     width: 3rem;
     height: 3rem;
-    border-width: 0.3em;
-    border-top-color: #00E6E6;
-    animation: spin 1s linear infinite;
+    border-width: .3em;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+#errorMessage {
+    color: red;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
 }
 
-/* Hide weather details until data is fetched */
-#weatherData,
-#chartContainer,
-#weatherIcon {
+#loading {
     display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
 }
 
-/* Chart Container */
-.chart-container {
-    width: 100%;
-    height: 400px;
-    margin-top: 30px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+#weatherData {
+    display: none;
 }
 
-/* Chart Customization */
-canvas {
-    background: transparent !important;
+#chartContainer {
+    display: none;
 }
 
-
-/* Footer */
 footer {
     margin-top: 30px;
     text-align: center;
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2em;
+    color: #333;
 }
 
 footer a {
-    color: #00E6E6;
+    color: #ff9900;
     text-decoration: none;
-    font-weight: bold;
 }
 
 footer a:hover {

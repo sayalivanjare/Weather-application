@@ -77,13 +77,18 @@ async function getWeatherData(location) {
     }
 }
 
-
 function createHourlyTempChart(labels, temperatures) {
-     if (chartInstance !== null) {
-        chartInstance.destroy();
+    if (!document.getElementById('tempChart')) {
+        console.error("Canvas element not found!");
+        return;
     }
 
     const ctx = document.getElementById('tempChart').getContext('2d');
+    
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
     chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -91,8 +96,8 @@ function createHourlyTempChart(labels, temperatures) {
             datasets: [{
                 label: 'Temperature (°C)',
                 data: temperatures,
-                borderColor: '#00E6E6', /* Neon Cyan Line */
-                backgroundColor: 'rgba(0, 230, 230, 0.2)', /* Transparent Fill */
+                borderColor: '#00E6E6',
+                backgroundColor: 'rgba(0, 230, 230, 0.2)',
                 pointBackgroundColor: '#00E6E6',
                 pointBorderColor: '#FFF',
                 fill: true,
@@ -103,18 +108,16 @@ function createHourlyTempChart(labels, temperatures) {
             responsive: true,
             scales: {
                 x: {
-                    ticks: { color: '#FFF' } /* White X-axis Labels */
+                    ticks: { color: '#FFF' }
                 },
                 y: {
-                    ticks: { color: '#FFF' }, /* White Y-axis Labels */
+                    ticks: { color: '#FFF' },
                     beginAtZero: false,
-                    grid: { color: 'rgba(255, 255, 255, 0.2)' } /* Light Grid */
+                    grid: { color: 'rgba(255, 255, 255, 0.2)' }
                 }
             },
             plugins: {
-                legend: {
-                    labels: { color: '#FFF' } /* White Legend */
-                }
+                legend: { labels: { color: '#FFF' } }
             }
         }
     });

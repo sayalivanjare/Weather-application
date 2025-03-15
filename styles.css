@@ -1,0 +1,116 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #e0f7fa;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: background 1s ease-in-out;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.weather-card {
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.weather-card:hover {
+    transform: scale(1.05);
+}
+
+.weather-card h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.weather-card p {
+    font-size: 1.5em;
+}
+
+.chart-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.input-group input {
+    border-radius: 25px;
+    padding: 15px;
+    font-size: 1.2em;
+    transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+    border: 2px solid #ffcc00;
+    outline: none;
+}
+
+.input-group button {
+    border-radius: 25px;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    background-color: #ff9900;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.input-group button:hover {
+    background-color: #ffcc00;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: .3em;
+}
+
+#errorMessage {
+    color: red;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#loading {
+    display: none;
+}
+
+#weatherData {
+    display: none;
+}
+
+#chartContainer {
+    display: none;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+}
+
+footer a {
+    color: #ff9900;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

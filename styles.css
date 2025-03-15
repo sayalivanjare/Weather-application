@@ -131,11 +131,15 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Visibility Control */
-#loading,
-#weatherData, {
+/* Hide weather details until data is fetched */
+#weatherData,
+#chartContainer,
+#weatherIcon {
     display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
+
 /* Chart Container */
 .chart-container {
     width: 100%;

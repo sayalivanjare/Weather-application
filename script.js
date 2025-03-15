@@ -105,8 +105,9 @@ function createHourlyTempChart(labels, temperatures) {
             }
         }
     });
-}function createHourlyTempChart(labels, temperatures) {
-    if (chartInstance !== null) {
+} 
+function createHourlyTempChart(labels, temperatures) {
+     if (chartInstance !== null) {
         chartInstance.destroy();
     }
 

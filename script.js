@@ -1,4 +1,6 @@
-/ Load valid city and country names from a JSON file or API
+let chartInstance = null;
+
+// Load valid city and country names from a JSON file or API
 let validLocations = [];
 
 async function loadValidLocations() {
@@ -24,7 +26,7 @@ async function getWeatherData(location) {
         return;
     }
 
-    const geoUrl = https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&limit=5&appid=${apiKey};
+    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&limit=5&appid=${apiKey}`;
 
     try {
         const geoResponse = await fetch(geoUrl);
@@ -37,8 +39,8 @@ async function getWeatherData(location) {
         const { lat, lon, name, country } = geoData[0];
 
         // Fetch Weather Data
-        const weatherUrl = https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric;
-        const forecastUrl = https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric;
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
         const weatherResponse = await fetch(weatherUrl);
         const weatherData = await weatherResponse.json();
@@ -48,11 +50,11 @@ async function getWeatherData(location) {
         }
 
         // Display Weather Data
-        document.getElementById('cityName').textContent = ${name}, ${country};
+        document.getElementById('cityName').textContent = `${name}, ${country}`;
         document.getElementById('weatherDescription').textContent = weatherData.weather[0].description;
-        document.getElementById('temperature').textContent = Temperature: ${weatherData.main.temp}°C;
-        document.getElementById('humidity').textContent = Humidity: ${weatherData.main.humidity}%;
-        document.getElementById('weatherIcon').src = https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png;
+        document.getElementById('temperature').textContent = `Temperature: ${weatherData.main.temp}°C`;
+        document.getElementById('humidity').textContent = `Humidity: ${weatherData.main.humidity}%`;
+        document.getElementById('weatherIcon').src = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
 
         // Fetch Forecast Data
         const forecastResponse = await fetch(forecastUrl);
@@ -66,7 +68,7 @@ async function getWeatherData(location) {
         document.getElementById('weatherData').style.display = 'block';
         document.getElementById('chartContainer').style.display = 'block';
     } catch (error) {
-        document.getElementById('errorMessage').textContent = Error: ${error.message};
+        document.getElementById('errorMessage').textContent = `Error: ${error.message}`;
         document.getElementById('errorMessage').style.display = 'block';
         document.getElementById('weatherData').style.display = 'none';
         document.getElementById('chartContainer').style.display = 'none';
@@ -76,17 +78,11 @@ async function getWeatherData(location) {
 }
 
 function createHourlyTempChart(labels, temperatures) {
-    if (!document.getElementById('tempChart')) {
-        console.error("Canvas element not found!");
-        return;
-    }
-
-    const ctx = document.getElementById('tempChart').getContext('2d');
-    
-    if (chartInstance) {
+    if (chartInstance !== null) {
         chartInstance.destroy();
     }
 
+    const ctx = document.getElementById('tempChart').getContext('2d');
     chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -94,10 +90,8 @@ function createHourlyTempChart(labels, temperatures) {
             datasets: [{
                 label: 'Temperature (°C)',
                 data: temperatures,
-                borderColor: '#00E6E6',
-                backgroundColor: 'rgba(0, 230, 230, 0.2)',
-                pointBackgroundColor: '#00E6E6',
-                pointBorderColor: '#FFF',
+                borderColor: '#ff6f61',
+                backgroundColor: 'rgba(255, 111, 97, 0.2)',
                 fill: true,
                 tension: 0.4
             }]
@@ -105,22 +99,13 @@ function createHourlyTempChart(labels, temperatures) {
         options: {
             responsive: true,
             scales: {
-                x: {
-                    ticks: { color: '#FFF' }
-                },
                 y: {
-                    ticks: { color: '#FFF' },
-                    beginAtZero: false,
-                    grid: { color: 'rgba(255, 255, 255, 0.2)' }
+                    beginAtZero: false
                 }
-            },
-            plugins: {
-                legend: { labels: { color: '#FFF' } }
             }
         }
     });
 }
-
 
 document.getElementById('getWeatherBtn').addEventListener('click', function() {
     let location = document.getElementById('city').value.trim();
@@ -139,4 +124,4 @@ document.getElementById('getWeatherBtn').addEventListener('click', function() {
 });
 
 // Load valid locations on page load
-loadValidLocations();       
+loadValidLocations();

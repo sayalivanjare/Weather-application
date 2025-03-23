@@ -40,9 +40,8 @@ A real-time **Weather Forecast Website** that allows users to check current weat
 
 ## 📸 Screenshots
 
-![Homepage](https://github.com/user-attachments/assets/your-homepage-image-link)
-
-![Hourly Forecast](https://github.com/user-attachments/assets/your-hourly-forecast-image-link)
+![Search](https://github.com/user-attachments/assets/76ee3257-4bdc-41b4-9a0b-6fbff39c8310)
+![Hourly Chart](https://github.com/user-attachments/assets/8ec4b1b4-93f4-4a7d-8f70-539422b0ff8d)
 
 
 ## 🌐 Live Demo
@@ -65,5 +64,5 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ### 📩 Contact
 
-For any queries, reach out via [GitHub Issues](https://github.com/your-username/weather-forecast/issues).
+For any queries, reach out via [GitHub Issues](https://github.com/sayalivanjare/weather-application/issues).
 

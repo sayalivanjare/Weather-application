@@ -1,6 +1,6 @@
 let chartInstance = null;
 
-// Load valid city and country names from a JSON file or API
+// Load valid city names from a JSON file or API
 let validLocations = [];
 
 async function loadValidLocations() {
@@ -12,7 +12,7 @@ async function loadValidLocations() {
     }
 }
 
-// Function to check if input is a valid city or country
+// Function to check if input is a valid city
 function isValidLocation(input) {
     return validLocations.some(loc => loc.name.toLowerCase() === input.toLowerCase());
 }
@@ -111,7 +111,7 @@ document.getElementById('getWeatherBtn').addEventListener('click', function() {
     let location = document.getElementById('city').value.trim();
 
     if (!location || location.length < 3) {
-        alert('Please enter a valid city or country with at least 3 characters.');
+        alert('Please enter a valid city  with at least 3 characters.');
         return;
     }
 

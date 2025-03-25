@@ -33,7 +33,7 @@ async function getWeatherData(location) {
         const geoData = await geoResponse.json();
 
         if (!geoData || geoData.length === 0) {
-            throw new Error("Location not found. Please enter a valid city or country.");
+            throw new Error("Location not found. Please enter a valid city.");
         }
 
         const { lat, lon, name, country } = geoData[0];

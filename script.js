@@ -22,7 +22,7 @@ async function getWeatherData(location) {
     const apiKey = "44b66bbb72cd546198c7c08426c0ed11";
     
     if (!isValidLocation(location)) {
-        alert("Invalid city or country. Please enter a correct location.");
+        alert("Invalid city. Please enter a correct location.");
         return;
     }
 
